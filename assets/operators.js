@@ -10,7 +10,10 @@ const runObservable = () => {
     .subscribe(console.log);
 
   // time
-  Rx.Observable.interval(500).take(5)
+  Rx.Observable.interval(500)
+    .take(5)
+    //.filter(x => x % 2)
+    //.map(x => x * 2)
     .subscribe(console.log);
 
   // Rx.Observable.fromEvent()

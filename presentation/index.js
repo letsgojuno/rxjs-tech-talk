@@ -342,7 +342,7 @@ export default class Presentation extends React.Component {
           <List>
             <Appear><ListItem>Managed state via reducers</ListItem></Appear>
             <Appear>
-              <ListItem>Dispatch actions for state updates</ListItem>
+              <ListItem>Dispatch actions to update state</ListItem>
             </Appear>
             <Appear><ListItem>State updates are Synchronous</ListItem></Appear>
             <Appear>
