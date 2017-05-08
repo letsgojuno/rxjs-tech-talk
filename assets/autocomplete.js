@@ -8,8 +8,14 @@ const style = { height: '40vh', overflowY: 'scroll', outline: '1px solid' };
 const githubSearchAPI = 'https://api.github.com/search/repositories?q=';
 
 const Autocomplete = componentFromStream(props$ => {
-
   const { handler: onChange, stream: searchTerms$ } = createEventHandler();
+
+  const ops$ = Observable.interval(200)
+    .zip(
+      Observable.from('Well this is embarrassing, we broke it.'),
+      (i, c) => c
+    )
+    .scan((a, x) => a + x);
 
   const result$ = searchTerms$
     .filter(term => term.length > 2)
@@ -18,7 +24,7 @@ const Autocomplete = componentFromStream(props$ => {
     .switchMap(term =>
       Observable.ajax(`${githubSearchAPI}${term}`)
         .map(resp => resp.response.items.map(item => item.full_name))
-        .catch(error => Observable.of(new Error(error)))
+        .catch(error => ops$)
     )
     .startWith([]);
 
